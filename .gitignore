@@ -1,3 +1,6 @@
 data/* 
 ./traffic_signs/lenet/data/*
 *-data
+saved_models/*
+traffic_signs_classification/lenet/saved_models/*
+traffic_signs_classification/saved_models/*
