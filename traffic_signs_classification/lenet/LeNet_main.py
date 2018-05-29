@@ -62,7 +62,7 @@ def evaluate(X_data, y_data):
         x: batch_x,
         y: batch_y,
         keep_prob: 1.
-      }
+
     )
     total_acc += acc * len(batch_x)
 
@@ -94,7 +94,7 @@ with tf.Session() as sess:
     print("Validation accuracy = {:.3f}".format(validation_acc))
     print()
   time1 = time()
-  saver.save(sess, "../saved_models")
+  saver.save(sess, "./saved_models/")
   print("Model saved!")
   print("{:.1f}s taken to train the model.\n".format((time1 - time0) / 1000 / 60))
     

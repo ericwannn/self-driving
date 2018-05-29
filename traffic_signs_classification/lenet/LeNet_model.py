@@ -10,7 +10,7 @@ import tensorflow as tf
 from sklearn.utils import shuffle
 
 
-def get_weight_bias(shape):
+def get_weight_bias(shape, regularizer=None):
   weights = tf.get_variable(
     "weights", shape=shape,
     initializer=tf.truncated_normal_initializer(stddev=0.1)
@@ -19,6 +19,8 @@ def get_weight_bias(shape):
     "biases", shape=[shape[-1]],
     initializer=tf.constant_initializer(.0)
   )
+  if regularizer:
+    tf.add_to_collection("losses", regularizer(weights))
   return weights, biases
 
 def valid_conv(inputs, weights, biases):
@@ -29,7 +31,7 @@ def valid_conv(inputs, weights, biases):
   inputs = tf.nn.bias_add(inputs, biases)
   return tf.nn.relu(inputs)
 
-def inference(inputs, keep_prob, regularizer):
+def inference(inputs, keep_prob):
 
   with tf.variable_scope("conv1-1"):
     weights, biases = get_weight_bias([3, 3, 1, 32])
